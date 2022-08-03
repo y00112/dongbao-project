@@ -409,3 +409,8 @@ public ResultWrapper update(@RequestBody UmsMember umsMember) {
     return umsMemberService.update(umsMember);
 }
 ```
+
+## 10：验证码
+
+> 实习图形数组验证码 ，并破解
+
