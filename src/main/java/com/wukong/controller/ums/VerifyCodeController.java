@@ -1,5 +1,6 @@
 package com.wukong.controller.ums;
 
+import com.sun.xml.internal.messaging.saaj.util.ByteOutputStream;
 import com.wukong.common.annotations.TokenCheck;
 import com.wukong.pojo.ImageCode;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.util.Base64;
 
 /**
  * Created By WuKong on 2022/8/3 20:46
@@ -50,10 +52,38 @@ public class VerifyCodeController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+
+    @TokenCheck(required = false)
+    @GetMapping("/generator-base64")
+    public String generatorCodeBase64(HttpServletRequest request,HttpServletResponse response) {
+        System.out.println("/code/generator-base64");
+
+        ImageCode imageCode = ImageCode.getInstance();
+
+        //验证码的值
+        String code = imageCode.getCode();
+
+
+        //验证码图片
+        ByteArrayInputStream image = imageCode.getImage();
+
+        request.getSession().setAttribute(attrName,code);
+
+        ByteOutputStream swapStream = new ByteOutputStream();
+        byte[] buff = new byte[1024];
+        int r = 0;
+        while ((r=image.read(buff,0,1024))>0){
+            swapStream.write(buff,0,r);
+        }
+
+        byte[] data = swapStream.toByteArray();
+
+        return Base64.getEncoder().encodeToString(data);
 
 
     }
-
     /**
      * 校验验证码
      * @param verifyCode

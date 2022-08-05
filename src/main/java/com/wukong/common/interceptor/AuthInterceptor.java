@@ -28,7 +28,7 @@ public class AuthInterceptor implements HandlerInterceptor {
         String token = request.getHeader("token");
 
         //token.equals("")
-        if (token.isEmpty()) {
+        if (token == null) {
             throw new TokenException("token 为空");
         }
 

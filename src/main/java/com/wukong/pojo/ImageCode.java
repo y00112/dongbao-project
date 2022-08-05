@@ -54,18 +54,45 @@ public class ImageCode {
         //5、画字体
         graphics.setFont(new Font("微软雅黑",Font.BOLD,30));
 
-        //6、画字
+        //6、画字 生成六位数字
         Random random = new Random();
-        code = "";
-        for (int i = 0; i < 6; i++) {
-            String s = String.valueOf(random.nextInt(10));
-            code += s;
+//        code = "";
+//        for (int i = 0; i < 6; i++) {
+//            String s = String.valueOf(random.nextInt(10));
+//            code += s;
+//
+//            graphics.setColor(new Color(225,154,12));
+//            graphics.drawString(s,(width/6)*i,40);
+//
+//        }
 
-            graphics.setColor(new Color(225,154,12));
-            graphics.drawString(s,(width/6)*i,40);
+        int num1 = random.nextInt(20);
+        int num2 = random.nextInt(20);
+        int flag = random.nextInt(10);
+        graphics.setColor(new Color(120,77,190));
 
-            //划线
+        graphics.drawString(num1 + "",(width/6)*0+2,40);
+
+
+
+        graphics.drawString(flag % 2 == 0 ? "+":"-",(width/6)*1+2,40);
+
+        graphics.drawString(num2 + "",(width/6)*2+2,40);
+
+        graphics.drawString("=",(width/6)*3+2,40);
+
+        graphics.drawString("?",(width/6)*4+2,40);
+
+        int result = 0;
+
+        if (flag % 2 == 0) {
+            result = num1 + num2;
+        }else {
+            result = num1 - num2;
         }
+
+        this.code = result +"";
+
 
         //7、收笔
         graphics.dispose();

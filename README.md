@@ -305,7 +305,7 @@ md5是一种散列算法（md5），可以通过彩虹表破解，不能反解�
 
 
 
-## 9：Token鉴权、、SSO单点登录
+## 9：Token鉴权、SSO单点登录
 
 > 使用annotation（注解）方式实现token 鉴权，使用自定义注解的方式，将身份拦截器作用在注解注解上，简化开发。
 >
@@ -414,3 +414,4 @@ public ResultWrapper update(@RequestBody UmsMember umsMember) {
 
 > 实习图形数组验证码 ，并破解
 
+加载
